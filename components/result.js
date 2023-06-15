@@ -25,7 +25,7 @@ export default function Result({ address }) {
 
 const styles = StyleSheet.create({
     result: {
-        marginTop: 60,
+        marginTop: 30,
     },
     block: {
         backgroundColor: '#ffbf75',

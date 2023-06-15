@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
 
 import Result from './components/result';
 import { useState } from 'react';
@@ -20,12 +20,13 @@ export default function App() {
 
     const { cep, logradouro, localidade, uf, bairro } = await response.json();
 
-    if(!cep){
+    if (!cep) {
       setErrorMessage('Cep não encontrado');
+      setAddress();
       return null;
     }
     setErrorMessage('');
-    
+
     setAddress({
       cep,
       logradouro,
@@ -40,7 +41,7 @@ export default function App() {
       <View style={styles.body}>
 
         <Text style={styles.title}> ViaCep API </Text>
-        <Text style={styles.message}>Digite um Cep: </Text>
+        <Text style={styles.message}>Digite um Cep </Text>
         <TextInput
           placeholder="Cep: "
           keyboardType="numeric"
@@ -50,7 +51,9 @@ export default function App() {
         />
         <Text style={styles.error}>{errorMessage}</Text>
 
-        <Button style={styles.button} title="BUSCAR CEP" onPress={search} />
+        <TouchableOpacity style={styles.button} onPress={search}>
+          <Text style={styles.textButton}>BUSCAR CEP</Text>
+        </TouchableOpacity>
 
       </View>
 
@@ -94,8 +97,17 @@ const styles = StyleSheet.create({
     color: '#525558'
   },
   button: {
-    width: '50%',
+    marginTop: 10,
+    backgroundColor: '#75c7ff',
+    padding: 10,
+    width: 180,
     borderRadius: 10,
+  },
+  textButton: {
+    textAlign: 'center',
+    color: '#1b1c1d',
+    fontWeight: 'bold',
+    fontSize: 20
   },
   error: {
     margin: 5,
